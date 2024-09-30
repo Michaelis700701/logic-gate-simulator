@@ -10,7 +10,15 @@ class Sandbox(AppState):
         --------
         This class takes inputs and simulates logic gates.
         """
-        super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, BACKGROUND_COLOR, KEYS_PRESSED, zoomable=True, panable=True)
+        super().__init__(
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
+            BACKGROUND_COLOR,
+            KEYS_PRESSED,
+            zoomable=True,
+            panable=True,
+            maximum_zoom=2,
+            minimum_zoom=0.34)
 
         self.grid_spacing = Vector2(25, 25)
 
