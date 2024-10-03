@@ -7,7 +7,7 @@ TILE_SIZE = 64
 
 ACTIVE_STATE = {'active_state': None}
 
-TEXT_FONT = 'assets/text/Arial.ttf'
+FONT = "assets/text/Arial.ttf"
 
 KEYS_PRESSED = {
     pygame.K_F3: False,
@@ -17,6 +17,9 @@ KEYS_PRESSED = {
     pygame.K_LEFT: False,
 }
 
+# Constants
+
+CONNECTOR_SIZE = pygame.Vector2(30, 20)
 
 # Colors
 

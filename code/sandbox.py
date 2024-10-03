@@ -2,6 +2,7 @@ import pygame
 from pygame.math import Vector2
 from settings import *
 from pygame_support.support.app_state import AppState
+from logic_gate import LogicGate
 
 class Sandbox(AppState):
     def __init__(self) -> None:
@@ -21,6 +22,7 @@ class Sandbox(AppState):
             minimum_zoom=0.34)
 
         self.grid_spacing = Vector2(25, 25)
+        self.logic_gate_list = [LogicGate(Vector2(25, 25),'test', 'test', ['1', '2', '3', '4'], ['1'], self)]
 
 
     def draw_grid_lines(self) -> None:
@@ -48,9 +50,26 @@ class Sandbox(AppState):
             pygame.draw.line(self.surface, GRID_LINE_COLOR, line_start_pos, line_end_pos)
 
 
+    def draw_logic_gates(self) -> None:
+        """
+        Draws all logic gates in the logic_gate_list.
+        """
+        for logic_gate in self.logic_gate_list:
+            self.surface.blit(logic_gate.image, logic_gate.position + self.origin)
+
+
+    def event_loop(self, event) -> None:
+        """
+        """
+        for logic_gate in self.logic_gate_list:
+            logic_gate.pick_up(event)
+            print(logic_gate.picked_up)
+
+
     def draw_assets(self) -> None:
         """
         Draws all assets onto surface.
         """
         pygame.draw.circle(self.surface, WHITE, self.origin, 10)
         self.draw_grid_lines()
+        self.draw_logic_gates()
