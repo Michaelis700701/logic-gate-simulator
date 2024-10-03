@@ -88,7 +88,7 @@ class LogicGate():
         """
         max_connectors = max(len(self.connector_inputs), len(self.connector_outputs))
         self.block_rect = pygame.Rect(
-            self.position + Vector2(CONNECTOR_SIZE.x),
+            self.position + Vector2(CONNECTOR_SIZE.x, 0),
             (
                 self.symbol_label.get_width() + self.symbol_label_width_margin * 2,
                 (self.connectors_height_margin * (max_connectors + 1)) + CONNECTOR_SIZE.y * max_connectors
@@ -123,19 +123,21 @@ class LogicGate():
         event : Event
             Paramenter from the pygame method pygame.event.get() in the event loop.
         """
-        mouse_pos = Vector2(pygame.mouse.get_pos())
+        mouse_pos_relative_to_origin = Vector2(pygame.mouse.get_pos()) - self.sandbox.origin
         mouse_pressed = pygame.mouse.get_pressed()
 
-        if self.block_rect.collidepoint(mouse_pos.x - self.sandbox.origin.x, mouse_pos.y - self.sandbox.origin.y):
+        if self.block_rect.collidepoint(mouse_pos_relative_to_origin.x, mouse_pos_relative_to_origin.y):
             if event.type == pygame.MOUSEBUTTONDOWN and mouse_pressed[0]:
                 self.sandbox.pan_active = False
                 self.picked_up = True
-            if event.type == pygame.MOUSEBUTTONUP and self.picked_up == True:
-                self.picked_up = False
+                self.mouse_pos_relitive_from_block_rect_center = mouse_pos_relative_to_origin - self.block_rect.center
+        if event.type == pygame.MOUSEBUTTONUP and self.picked_up == True:
+            self.picked_up = False
+            self.mouse_pos_relitive_from_block_rect_center = Vector2(0, 0)
         
         if self.picked_up:
-            self.block_rect.center = mouse_pos - self.sandbox.origin
-            self.rect.center = mouse_pos - self.sandbox.origin
+            self.block_rect.center = mouse_pos_relative_to_origin - self.mouse_pos_relitive_from_block_rect_center
+            self.rect.center = mouse_pos_relative_to_origin - self.mouse_pos_relitive_from_block_rect_center
             self.position = self.rect.topleft
     
 
