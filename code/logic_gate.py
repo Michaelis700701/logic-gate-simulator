@@ -123,7 +123,7 @@ class LogicGate():
         event : Event
             Paramenter from the pygame method pygame.event.get() in the event loop.
         """
-        mouse_pos_relative_to_origin = Vector2(pygame.mouse.get_pos()) - self.sandbox.origin
+        mouse_pos_relative_to_origin = (Vector2(pygame.mouse.get_pos()) / self.sandbox.zoom) - self.sandbox.origin
         mouse_pressed = pygame.mouse.get_pressed()
 
         if self.block_rect.collidepoint(mouse_pos_relative_to_origin.x, mouse_pos_relative_to_origin.y):
