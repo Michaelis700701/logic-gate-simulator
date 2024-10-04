@@ -103,11 +103,14 @@ class LogicGate():
             pygame.SRCALPHA
         ).convert_alpha()
         
+        self.rect = self.image.get_rect()
+        
         block_rect_copy = self.block_rect.copy()
         block_rect_copy.topleft = (CONNECTOR_SIZE.x, 0)
+
         pygame.draw.rect(self.image, WHITE, block_rect_copy)
         pygame.draw.rect(self.image, BLACK, block_rect_copy, 2)
-        self.rect = self.image.get_rect()
+        self.image.blit(self.symbol_label, block_rect_copy.center - (Vector2(self.symbol_label.get_size()) / 2))
 
 
     def pick_up(

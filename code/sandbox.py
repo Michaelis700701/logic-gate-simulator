@@ -22,7 +22,7 @@ class Sandbox(AppState):
             minimum_zoom=0.34)
 
         self.grid_spacing = Vector2(25, 25)
-        self.logic_gate_list = [LogicGate(Vector2(25, 25),'test', 'test', ['1', '2', '3', '4'], ['1'], self)]
+        self.logic_gate_list = [LogicGate(Vector2(25, 25),'TEST GATE', 'TEST GATE', ['1', '2', '3', '4'], ['1'], self)]
 
 
     def draw_grid_lines(self) -> None:
