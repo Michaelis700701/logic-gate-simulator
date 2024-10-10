@@ -22,7 +22,20 @@ class Sandbox(AppState):
             minimum_zoom=0.34)
 
         self.grid_spacing = Vector2(25, 25)
-        self.logic_gate_list = [LogicGate(Vector2(25, 25),'TEST GATE', 'TEST GATE', ['1', '2', '3', '4'], ['1'], self)]
+        self.logic_gate_list = [
+            LogicGate(
+                Vector2(25, 25),
+                'TEST GATE',
+                'TEST GATE',
+                {
+                    'N': [('1', True), ('2', True), ('3', True), ('4', True)],
+                    'E': [('1', True), ('2', True), ('3', True), ('4', True)],
+                    'S': [('1', True)],
+                    'W': []
+                },
+                self
+            )
+        ]
 
 
     def draw_grid_lines(self) -> None:
@@ -63,7 +76,6 @@ class Sandbox(AppState):
         """
         for logic_gate in self.logic_gate_list:
             logic_gate.pick_up(event)
-            print(logic_gate.picked_up)
 
 
     def draw_assets(self) -> None:

@@ -18,11 +18,9 @@ KEYS_PRESSED = {
 }
 
 # Constants
-
 CONNECTOR_SIZE = pygame.Vector2(30, 20)
 
 # Colors
-
 BACKGROUND_COLOR = (50, 50, 50)
 GRID_LINE_COLOR = (40, 40, 40)
 WHITE = (255, 255, 255)
